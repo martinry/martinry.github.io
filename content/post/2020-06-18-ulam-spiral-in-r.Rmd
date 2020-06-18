@@ -8,6 +8,9 @@ tags:
   - R
   - programming
 description: ''
+output:
+  blogdown::html_page:
+    highlight: tango
 ---
 
 

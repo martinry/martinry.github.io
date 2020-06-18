@@ -17,10 +17,7 @@
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/how-i-made-this-blog/</guid>
-      <description>GithubCreate a new Github repository (or Github pages repo by naming it username.github.io)Check “Initialize this repository with a README”Add a licenseClone your repo to your home dir:
-cdgit clone https://github.com/martinry/martinry.github.io.gitcd martinry.github.ioInstall HugoMac:
-brew install hugoLinux:
-sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site ./ --force # --force to write to existing dir# Add a themegit submodule add https://github.</description>
+      <description>a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.2em; }.sourceCode { overflow: visible; }code.sourceCode { white-space: pre; position: relative; }div.sourceCode { margin: 1em 0; }pre.sourceCode { margin: 0; }@media screen {div.sourceCode { overflow: auto; }}@media print {code.sourceCode { white-space: pre-wrap; }a.sourceLine { text-indent: -1em; padding-left: 1em; }}pre.</description>
     </item>
     
     <item>
@@ -38,7 +35,7 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/ulam-spiral-in-r/</guid>
-      <description>spiral &amp;lt;- function(N){# Area sizearea &amp;lt;- matrix(1, N, N)# Find middle for x and y coordinatesy &amp;lt;- ceiling(N/2)x &amp;lt;- ceiling(N/2)# Direction vector with starting iterationsd &amp;lt;- c(1, # right1, # down2, # left2) # up# Sequence of directional indicess &amp;lt;- rep(seq(1:4), N**2/4)i = 1 # iterator from 1:NNj = 0 # iterator to keep track of current directionb = F # Initialize break as false# Loop until N^2 is reachedwhile(i &amp;lt;= N**2){# Break if goofedif(is.</description>
+      <description>a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.2em; }.sourceCode { overflow: visible; }code.sourceCode { white-space: pre; position: relative; }div.sourceCode { margin: 1em 0; }pre.sourceCode { margin: 0; }@media screen {div.sourceCode { overflow: auto; }}@media print {code.sourceCode { white-space: pre-wrap; }a.sourceLine { text-indent: -1em; padding-left: 1em; }}pre.</description>
     </item>
     
     <item>
