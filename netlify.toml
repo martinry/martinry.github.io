@@ -32,4 +32,4 @@
 [[headers]]
 for = "/post/*"
   [headers.values]
-    Basic-Auth= someuser:somepassword
+    Basic-Auth= "someuser:somepassword"
