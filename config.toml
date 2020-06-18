@@ -1,0 +1,13 @@
+baseURL = "https://martinry.netlify.app/"
+languageCode = "en-us"
+title = "My PhD Portfolio"
+theme = "ghostwriter"
+
+[params]
+    description = "Just tryin' to make a change :/"
+    github  = "https://github.com/martinry"
+    linkedin = "https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/"
+    twitter = "https://twitter.com/martinryden89"
+    instagram = "https://www.instagram.com/maartinry/"
+    background_color_class = "bg-near-black"
+
