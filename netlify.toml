@@ -28,3 +28,8 @@
 
 [context.next.environment]
  HUGO_ENABLEGITINFO = "true"
+
+[[headers]]
+for = "/post/*"
+  [headers.values]
+    Basic-Auth= someuser:somepassword
