@@ -2,14 +2,17 @@
 id: b10c1a44-8c74-435b-9852-396ac61ed8d0
 plugins:
   - name: password-protect
+    path: /protected
     options:
       password: $SITE_PASSWORD
       loginPage: login.html
       maxFailures: 5
       failureWindow: 600
       lockoutDuration: 600
-      ignorePatterns:
-        - '/css/*.css'
-        - '/js/*.js'
-        - '/img/*.jpg'
-  - name: webpage
+      ignorePatterns: []
+      username: $USERNAME
+      credentials:
+        - username: user1
+          password: $PASS1
+        - username: user2
+          password: pass2
