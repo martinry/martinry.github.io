@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>How I made this blog &middot; </title>
+        <meta name="description" content="GithubCreate a new Github repository (or Github pages repo by naming it username.github.io)Check “Initialize this repository with a README”Add a licenseClone your repo to your home dir:
+cdgit clone https://github.com/martinry/martinry.github.io.gitcd martinry.github.ioInstall HugoMac:
+brew install hugoLinux:
+sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site ./ --force # --force to write to existing dir# Add a themegit submodule add https://github.">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.72.0" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="/dist/site.css">
+        <link rel="stylesheet" href="/dist/syntax.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        
+        
+        
+    </head>
+    <body>
+        
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="My PhD Portfolio" href="/">My PhD Portfolio</a>
+                            </h1>
+                        
+                        <a class="button-square" href="/index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/martinryden89" rel="me">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/martinry" rel="me">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/" rel="me">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">How I made this blog</h1>
+    
+    <p class="post-date post-line">
+        <span>Published <time datetime="2020-06-18" itemprop="datePublished">Thu, Jun 18, 2020</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author">Martin Rydén</a>
+            </span>
+        </span>
+    </p>
+    
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+
+<div id="github" class="section level2">
+<h2>Github</h2>
+<ul>
+<li>Create a new Github repository (or Github pages repo by naming it username.github.io)
+<ul>
+<li>Check “Initialize this repository with a README”</li>
+<li>Add a license</li>
+</ul></li>
+</ul>
+<p>Clone your repo to your home dir:</p>
+<pre class="bash"><code>cd
+git clone https://github.com/martinry/martinry.github.io.git
+cd martinry.github.io</code></pre>
+</div>
+<div id="install-hugo" class="section level2">
+<h2>Install Hugo</h2>
+<p>Mac:</p>
+<pre class="bash"><code>brew install hugo</code></pre>
+<p>Linux:</p>
+<pre class="bash"><code>sudo apt-get install hugo</code></pre>
+</div>
+<div id="create-a-new-hugo-project" class="section level2">
+<h2>Create a new Hugo project</h2>
+<pre class="bash"><code># New project
+hugo new site ./ --force # --force to write to existing dir
+
+# Add a theme
+git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+echo &#39;theme = &quot;ananke&quot;&#39; &gt;&gt; config.toml
+
+# Open config
+nano config.toml
+</code></pre>
+<p>Add some information to config.toml, here’s how my file looks:</p>
+<pre class="bash"><code>baseURL = &quot;https://martinry.netlify.app/&quot;
+languageCode = &quot;en-us&quot;
+title = &quot;My PhD Portfolio&quot;
+theme = &quot;ananke&quot;
+[params]
+    description = &quot;Just tryin&#39; to make a change :/&quot;
+    github  = &quot;https://github.com/martinry&quot;
+    linkedin = &quot;https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/&quot;
+    twitter = &quot;https://twitter.com/martinryden89&quot;
+    instagram = &quot;https://www.instagram.com/maartinry/&quot;
+    background_color_class = &quot;bg-near-black&quot;</code></pre>
+</div>
+<div id="connect-to-netlify" class="section level2">
+<h2>Connect to Netlify</h2>
+<pre class="bash"><code># Create and edit netlify.toml
+nano netlify.toml</code></pre>
+<p>Add the following content:</p>
+<pre class="bash"><code>[build]
+ publish = &quot;public&quot;
+ command = &quot;hugo --gc --minify&quot;
+
+[context.production.environment]
+ HUGO_VERSION = &quot;0.72.0&quot;
+ HUGO_ENV = &quot;production&quot;
+ HUGO_ENABLEGITINFO = &quot;true&quot;
+
+[context.split1]
+ command = &quot;hugo --gc --minify --enableGitInfo&quot;
+
+[context.split1.environment]
+ HUGO_VERSION = &quot;0.72.0&quot;
+ HUGO_ENV = &quot;production&quot;
+
+[context.deploy-preview]
+ command = &quot;hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL&quot;
+
+[context.deploy-preview.environment]
+ HUGO_VERSION = &quot;0.72.0&quot;
+
+[context.branch-deploy]
+ command = &quot;hugo --gc --minify -b $DEPLOY_PRIME_URL&quot;
+
+[context.branch-deploy.environment]
+ HUGO_VERSION = &quot;0.72.0&quot;
+
+[context.next.environment]
+ HUGO_ENABLEGITINFO = &quot;true&quot;</code></pre>
+<ul>
+<li>Go to <a href="https://www.netlify.com/" class="uri">https://www.netlify.com/</a></li>
+<li>Sign up with Github</li>
+<li>New site from Git</li>
+<li>Select Github</li>
+<li>Authorize, and select your repository</li>
+<li>Set “Build command” to hugo –gc –minify</li>
+<li>Set “Publish directory” to public</li>
+<li>Click deploy site</li>
+<li>Click Site settings, then Change site name, and pick one to your liking</li>
+</ul>
+</div>
+<div id="writing-blog-posts-in-rmarkdown" class="section level2">
+<h2>Writing blog posts in Rmarkdown</h2>
+<p>In Rstudio:</p>
+<pre class="r"><code>devtools::install_github(&#39;rstudio/blogdown&#39;)
+
+# alternatively
+install.packages(&#39;blogdown&#39;)
+
+setwd(&quot;~/martinry.github.io/&quot;)
+
+blogdown:::serve_site() # Build and render site locally
+blogdown:::new_post_addin() # Open form to create post</code></pre>
+<ul>
+<li>In th form, fill in the necessary fields, change subdirectory to posts and the format to RMarkdown (.Rmd)</li>
+<li>Change “draft” to false</li>
+</ul>
+<p>The result should look something like:</p>
+<pre class="r"><code>---
+title: Rmarkdown test
+author: Martin Rydén
+date: &#39;2020-06-16&#39;
+slug: rmarkdown-test
+categories: []
+tags:
+  - rmarkdown
+draft: false
+---
+    
+## Here is a title
+Here is some content</code></pre>
+<p>Go back to the terminal and type:</p>
+<pre class="bash"><code>git add ./
+git commit -m &quot;First post&quot;
+git push</code></pre>
+<p>Within seconds, your site is deployed to
+<a href="https://sitename.netlify.app" class="uri">https://sitename.netlify.app</a></p>
+</div>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+            
+                <a href="/tags/howto/">howto</a>
+            
+        </p>
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=How%20I%20made%20this%20blog&url=%2fpost%2fhow-i-made-this-blog%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2fpost%2fhow-i-made-this-blog%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=%2fpost%2fhow-i-made-this-blog%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+    </div>
+</footer>
+
+        
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="My PhD Portfolio" href="/">My PhD Portfolio</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2020 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="/js/jquery-1.11.3.min.js"></script>
+        <script src="/js/jquery.fitvids.js"></script>
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
+

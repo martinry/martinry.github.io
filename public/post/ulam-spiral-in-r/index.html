@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>My awesome project &middot; </title>
-        <meta name="description" content="Description of my awesome project.">
+        <title>Ulam spiral in R &middot; </title>
+        <meta name="description" content="spiral &lt;- function(N){# Area sizearea &lt;- matrix(1, N, N)# Find middle for x and y coordinatesy &lt;- ceiling(N/2)x &lt;- ceiling(N/2)# Direction vector with starting iterationsd &lt;- c(1, # right1, # down2, # left2) # up# Sequence of directional indicess &lt;- rep(seq(1:4), N**2/4)i = 1 # iterator from 1:NNj = 0 # iterator to keep track of current directionb = F # Initialize break as false# Loop until N^2 is reachedwhile(i &lt;= N**2){# Break if goofedif(is.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
         <meta name="generator" content="Hugo 0.72.0" />
@@ -64,32 +64,124 @@
 
 
 <div class="container">
-    <article class="post-container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
         <header class="post-header">
-    <h1 class="post-title">My awesome project</h1>
+    <h1 class="post-title" itemprop="name headline">Ulam spiral in R</h1>
     
-        <p class="post-description">Description of my awesome project.</p>
+    <p class="post-date post-line">
+        <span>Published <time datetime="2020-06-18" itemprop="datePublished">Thu, Jun 18, 2020</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
+            <span itemprop="name">
+                <a href="#" itemprop="url" rel="author">Martin Rydén</a>
+            </span>
+        </span>
+    </p>
     
 </header>
 
-        <div class="post-content clearfix">
+        <div class="post-content clearfix" itemprop="articleBody">
     
 
-    <h2 id="about-project">About project</h2>
-<p>Aenean ipsum justo, semper eu nisl ut, pretium tincidunt sem. Praesent et diam sit amet lacus lobortis dictum a id lacus. Quisque hendrerit sit amet turpis eu varius. Ut id lorem ac felis ultrices tincidunt. Pellentesque consequat arcu ac fringilla imperdiet. Phasellus pellentesque, sapien non pulvinar blandit, sapien ante aliquet felis, vel porttitor sapien ante in lacus. Fusce non urna aliquet, malesuada nibh vel, luctus urna. Phasellus ut lacus molestie, varius purus quis, malesuada lorem.</p>
-<h2 id="install">Install</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go get -u -v github.com/spf13/hugo
-</code></pre></div><h2 id="docs">Docs</h2>
-<p><a href="https://godoc.org/github.com/spf13/hugo">https://godoc.org/github.com/spf13/hugo</a></p>
+    
+
+
+<iframe width="500" height="500" scrolling="no" frameborder="no" src="https://qodb.shinyapps.io/spiral/">
+</iframe>
+<pre class="r"><code>spiral &lt;- function(N){
+    # Area size
+    area &lt;- matrix(1, N, N)
+    
+    # Find middle for x and y coordinates
+    y &lt;- ceiling(N/2)
+    x &lt;- ceiling(N/2)
+    
+    # Direction vector with starting iterations
+    d &lt;- c(1, # right
+           1, # down
+           2, # left
+           2) # up
+    
+    # Sequence of directional indices
+    s &lt;- rep(seq(1:4), N**2/4)
+    
+    i = 1 # iterator from 1:NN
+    j = 0 # iterator to keep track of current direction
+    
+    b = F # Initialize break as false
+    
+    # Loop until N^2 is reached
+    while(i &lt;= N**2){
+        # Break if goofed
+        if(is.na(s[i]) | b){
+            break
+        }
+        
+        if(i &gt; 1) {
+            j = j + 1 # Increment dir vector
+            
+            # Edge case if N is even
+            if((N%%2 == 0) &amp; (d[s[j]] + i &gt; N**2)){
+                stay &lt;- d[s[j]] - 1 # How many i iterations should we stay in a direction
+                b = T
+            } else {
+                stay &lt;- d[s[j]]
+            }
+            
+            while(stay &gt; 0){
+                if(s[j] == 1){
+                    y = y + 1 # Go right
+                } else if(s[j] == 2){
+                    x = x + 1 # Go down
+                } else if(s[j] == 3){
+                    y = y - 1 # Go left
+                } else if (s[j] == 4){
+                    x = x - 1 # Go up
+                }
+                
+                area[x, y] = i # Set position value to current i iteration
+                
+                # Increment direction turns for next iteration
+                if(stay == 1){
+                    d[s[j]] = d[s[j]] + 2
+                }
+                
+                stay = stay - 1
+                
+                if(i &gt;= N**2){
+                    break
+                } else {
+                    i = i + 1
+                }
+            }
+            # First position    
+        } else {
+            area[x, y] = i
+            i = i + 1
+        }
+    }
+    
+    return(area)
+}</code></pre>
 
 </div>
 
         <footer class="post-footer clearfix">
     
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+            
+                <a href="/tags/r/">R</a>, 
+            
+                <a href="/tags/programming/">programming</a>
+            
+        </p>
+    
 
     <div class="share">
         
-            <a class="icon-twitter" href="https://twitter.com/share?text=My%20awesome%20project&url=%2fproject%2fmy-awesome-project%2f"
+            <a class="icon-twitter" href="https://twitter.com/share?text=Ulam%20spiral%20in%20R&url=%2fpost%2fulam-spiral-in-r%2f"
                 onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                 <i class="fa fa-twitter"></i>
                 <span class="hidden">Twitter</span>
@@ -97,7 +189,7 @@
         
 
         
-            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2fproject%2fmy-awesome-project%2f"
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2fpost%2fulam-spiral-in-r%2f"
                 onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                 <i class="fa fa-facebook"></i>
                 <span class="hidden">Facebook</span>
@@ -105,7 +197,7 @@
         
 
         
-            <a class="icon-google-plus" href="https://plus.google.com/share?url=%2fproject%2fmy-awesome-project%2f"
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=%2fpost%2fulam-spiral-in-r%2f"
               onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
               <i class="fa fa-google-plus"></i>
                 <span class="hidden">Google+</span>
@@ -114,6 +206,8 @@
         
     </div>
 </footer>
+
+        
     </article>
 </div>
 
