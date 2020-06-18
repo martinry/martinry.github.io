@@ -24,6 +24,15 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
     </item>
     
     <item>
+      <title>test</title>
+      <link>/post/test/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Ulam spiral in R</title>
       <link>/post/ulam-spiral-in-r/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
