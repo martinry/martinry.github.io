@@ -1,3 +1,8 @@
+[[headers]]
+	for = "/*"
+	  [headers.values]
+	    Basic-Auth = "user:password"
+
 [build]
  publish = "public"
  command = "hugo --gc --minify"
@@ -28,8 +33,3 @@
 
 [context.next.environment]
  HUGO_ENABLEGITINFO = "true"
-
-[[headers]]
-	for = "/post/*"
-	  [headers.values]
-	    Basic-Auth = "user:password"
