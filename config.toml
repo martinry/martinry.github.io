@@ -24,3 +24,4 @@ enableRobotsTXT = true
     background_color_class = "bg-near-black"
     featured_image = "/images/arachnid-blur-close-up-cobweb-276254.crop.jpg"
     recent_posts_number = 5
+    custom_css = ["css/custom.css"]

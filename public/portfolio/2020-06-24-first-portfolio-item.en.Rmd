@@ -1,0 +1,12 @@
+---
+title: First portfolio item
+author: Martin Rydén
+date: '2020-06-24'
+slug: first-portfolio-item
+categories: []
+tags: []
+description: ''
+featured_image: ''
+_build:
+  list: false
+---

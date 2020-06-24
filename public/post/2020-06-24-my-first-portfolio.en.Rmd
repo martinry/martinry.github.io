@@ -1,0 +1,15 @@
+---
+title: My first portfolio
+author: Martin Rydén
+date: '2020-06-24'
+slug: my-first-portfolio
+categories:
+  - portfolio
+tags: []
+description: ''
+featured_image: ''
+_build:
+  list: false
+---
+
+here is some info
