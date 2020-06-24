@@ -15,13 +15,18 @@ output:
     toc: true
 ---
 
-# 1.0 - Rstudio tips
+# 1.0 Rstudio tips
 
-Rstudio is an incredible IDE. Here are some tips on how to use it to its full extent.
+Rstudio is a powerful IDE. Study these not-so-obvious tips on how to realize its true potential.
 
 ## 1.1 Keyboard Shortcuts
 
 Some information
+
+Ctrl + Shift + m gives
+```{r, eval = F}
+%>%
+```
 
 ## 1.2 Snippets
 
