@@ -3,9 +3,10 @@ languageCode = "en-us"
 title = "My PhD Portfolio"
 theme = "gohugo-theme-ananke"
 
+MetaDataFormat = "yaml"
 DefaultContentLanguage = "en"
 SectionPagesMenu = "main"
-Paginate = 10 # this is set low for demonstrating with dummy content. Set to a higher number
+Paginate = 5
 googleAnalytics = ""
 enableRobotsTXT = true
 
@@ -21,4 +22,5 @@ enableRobotsTXT = true
     twitter = "https://twitter.com/martinryden89"
     instagram = "https://www.instagram.com/maartinry/"
     background_color_class = "bg-near-black"
-    featured_image = "/images/gohugo-default-sample-hero-image.jpg"
+    featured_image = "/images/arachnid-blur-close-up-cobweb-276254.crop.jpg"
+    recent_posts_number = 5

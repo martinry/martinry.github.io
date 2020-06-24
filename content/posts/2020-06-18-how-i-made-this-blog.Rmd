@@ -6,13 +6,7 @@ slug: how-i-made-this-blog
 categories: []
 tags:
   - howto
-description: ''
-output:
-  blogdown::html_page:
-    highlight: espresso
 ---
-
-
 
 ## Github
 
@@ -58,7 +52,20 @@ Add some information to config.toml, here's how my file looks:
 baseURL = "https://martinry.netlify.app/"
 languageCode = "en-us"
 title = "My PhD Portfolio"
-theme = "ananke"
+theme = "gohugo-theme-ananke"
+
+MetaDataFormat = "yaml"
+DefaultContentLanguage = "en"
+SectionPagesMenu = "main"
+Paginate = 5
+googleAnalytics = ""
+enableRobotsTXT = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
 [params]
     description = "Just tryin' to make a change :/"
     github  = "https://github.com/martinry"
@@ -66,6 +73,7 @@ theme = "ananke"
     twitter = "https://twitter.com/martinryden89"
     instagram = "https://www.instagram.com/maartinry/"
     background_color_class = "bg-near-black"
+	recent_posts_number = 5
 ```
 
 
@@ -121,7 +129,7 @@ Add the following content:
 
 ## Writing blog posts in Rmarkdown
 In Rstudio:
-```{r, echo = T, eval = F}
+```{Rscript, echo = T, eval = F}
 devtools::install_github('rstudio/blogdown')
 
 # alternatively
@@ -139,7 +147,7 @@ blogdown:::new_post_addin() # Open form to create post
 
 The result should look something like:
 
-```{R, echo=T, eval=F}
+```{Rscript, echo=T, eval=F}
 ---
 title: Rmarkdown test
 author: Martin Rydén

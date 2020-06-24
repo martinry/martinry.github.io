@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="{{"dist/css/solarized-dark.css" | absURL}}" rel="stylesheet" id="theme-stylesheet"> 
+<script src="{{ "dist/js/highlight.pack.js" | absURL }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 {{ $featured_image := partial "func/GetFeaturedImage.html" . }}
 {{ if $featured_image }}
   {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
