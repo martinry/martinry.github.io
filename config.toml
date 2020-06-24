@@ -1,6 +1,6 @@
 baseURL = "https://martinry.netlify.app/"
 languageCode = "en-us"
-title = "My PhD Portfolio"
+title = "Martin's PhD Portfolio"
 theme = "gohugo-theme-ananke"
 
 MetaDataFormat = "yaml"
