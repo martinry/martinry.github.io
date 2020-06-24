@@ -5,7 +5,7 @@ date: '2020-06-18'
 slug: how-i-made-this-blog
 categories: []
 tags:
-  - howto
+  - how-to
 ---
 
 ## Github

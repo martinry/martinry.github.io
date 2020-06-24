@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Martin&#39;s PhD Portfolio</title>
-    <link>/</link>
-    <description>Recent content on Martin&#39;s PhD Portfolio</description>
+    <title>how-to on Martin&#39;s PhD Portfolio</title>
+    <link>/tags/how-to/</link>
+    <description>Recent content in how-to on Martin&#39;s PhD Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 24 Jun 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/how-to/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -32,15 +32,6 @@
 cdgit clone https://github.com/martinry/martinry.github.io.gitcd martinry.github.ioInstall HugoMac:
 brew install hugoLinux:
 sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site ./ --force # --force to write to existing dir# Add a themegit submodule add https://github.</description>
-    </item>
-    
-    <item>
-      <title>Ulam spiral in R</title>
-      <link>/posts/ulam-spiral-in-r/</link>
-      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/ulam-spiral-in-r/</guid>
-      <description>spiral &amp;lt;- function(N){# Area sizearea &amp;lt;- matrix(1, N, N)# Find middle for x and y coordinatesy &amp;lt;- ceiling(N/2)x &amp;lt;- ceiling(N/2)# Direction vector with starting iterationsd &amp;lt;- c(1, # right1, # down2, # left2) # up# Sequence of directional indicess &amp;lt;- rep(seq(1:4), N**2/4)i = 1 # iterator from 1:NNj = 0 # iterator to keep track of current directionb = F # Initialize break as false# Loop until N^2 is reachedwhile(i &amp;lt;= N**2){# Break if goofedif(is.</description>
     </item>
     
   </channel>

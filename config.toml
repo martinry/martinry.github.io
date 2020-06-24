@@ -22,6 +22,6 @@ enableRobotsTXT = true
     twitter = "https://twitter.com/martinryden89"
     instagram = "https://www.instagram.com/maartinry/"
     background_color_class = "bg-near-black"
-    featured_image = "/images/arachnid-blur-close-up-cobweb-276254.crop.jpg"
+    featured_image = "/images/arachnid-blur-close-up-cobweb-276254.crop.resize.jpg"
     recent_posts_number = 5
     custom_css = ["css/custom.css"]

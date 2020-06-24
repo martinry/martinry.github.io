@@ -6,10 +6,21 @@
     <description>Recent content in R on Martin&#39;s PhD Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R programming tips</title>
+      <link>/posts/r-programming-tips/</link>
+      <pubDate>Wed, 24 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/r-programming-tips/</guid>
+      <description>1.0 - Rstudio tips1.1 Keyboard Shortcuts1.2 Snippets1.3 Cheatsheets2.0 Code formatting2.1 CommentsReshaping dataLong to Wide1.0 - Rstudio tipsRstudio is an incredible IDE. Here are some tips on how to use it to its full extent.
+1.1 Keyboard ShortcutsSome information
+1.2 SnippetsSnippets are predefined blocks of code that are used to quickly insert a function.</description>
+    </item>
     
     <item>
       <title>Ulam spiral in R</title>
