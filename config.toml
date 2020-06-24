@@ -25,3 +25,7 @@ enableRobotsTXT = true
     featured_image = "/images/arachnid-blur-close-up-cobweb-276254.crop.resize.jpg"
     recent_posts_number = 5
     custom_css = ["css/custom.css"]
+
+[[params.footer.quicklinks]]
+    text = "Terms of Use"
+    link = "posts/code-of-conduct"

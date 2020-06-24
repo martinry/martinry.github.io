@@ -135,6 +135,7 @@
       <div class="tc-l pv4 pv6-l ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 white-90 mb0 lh-title">
           
+          
         </h1>
         
       </div>
@@ -183,10 +184,10 @@
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          1.0 Rstudio tips1.1 Keyboard Shortcuts1.2 Snippets1.3 Cheatsheets2.0 Code formatting2.1 CommentsReshaping dataLong to Wide1.0 Rstudio tipsRstudio is a powerful IDE. Study these not-so-obvious tips on how to realize its true potential.
-1.1 Keyboard ShortcutsSome information
+          1.0 Rstudio tips 1.1 Keyboard Shortcuts 1.2 Snippets 1.3 Cheatsheets  2.0 Code formatting 2.1 Comments  Reshaping data Long to Wide    1.0 Rstudio tips Rstudio is a powerful IDE. Study these not-so-obvious tips on how to realize its true potential.
+1.1 Keyboard Shortcuts Some information
 Ctrl &#43; Shift &#43; m gives
-%&amp;gt;%1.2 SnippetsSnippets are predefined blocks of code that are used to quickly insert a function.
+%&amp;gt;%  1.2 Snippets Snippets are predefined blocks of code that are used to quickly insert a function.
         </div>
           <a href="/posts/r-programming-tips/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
@@ -210,10 +211,10 @@ Ctrl &#43; Shift &#43; m gives
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          GithubCreate a new Github repository (or Github pages repo by naming it username.github.io)Check “Initialize this repository with a README”Add a licenseClone your repo to your home dir:
-cdgit clone https://github.com/martinry/martinry.github.io.gitcd martinry.github.ioInstall HugoMac:
-brew install hugoLinux:
-sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site ./ --force # --force to write to existing dir# Add a themegit submodule add https://github.
+          Github  Create a new Github repository (or Github pages repo by naming it username.github.io)  Check “Initialize this repository with a README” Add a license   Clone your repo to your home dir:
+cd git clone https://github.com/martinry/martinry.github.io.git cd martinry.github.io  Install Hugo Mac:
+brew install hugo Linux:
+sudo apt-get install hugo  Create a new Hugo project # New project hugo new site ./ --force # --force to write to existing dir # Add a theme git submodule add https://github.
         </div>
           <a href="/posts/how-i-made-this-blog/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
@@ -237,7 +238,7 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          spiral &amp;lt;- function(N){# Area sizearea &amp;lt;- matrix(1, N, N)# Find middle for x and y coordinatesy &amp;lt;- ceiling(N/2)x &amp;lt;- ceiling(N/2)# Direction vector with starting iterationsd &amp;lt;- c(1, # right1, # down2, # left2) # up# Sequence of directional indicess &amp;lt;- rep(seq(1:4), N**2/4)i = 1 # iterator from 1:NNj = 0 # iterator to keep track of current directionb = F # Initialize break as false# Loop until N^2 is reachedwhile(i &amp;lt;= N**2){# Break if goofedif(is.
+          spiral &amp;lt;- function(N){ # Area size area &amp;lt;- matrix(1, N, N) # Find middle for x and y coordinates y &amp;lt;- ceiling(N/2) x &amp;lt;- ceiling(N/2) # Direction vector with starting iterations d &amp;lt;- c(1, # right 1, # down 2, # left 2) # up # Sequence of directional indices s &amp;lt;- rep(seq(1:4), N**2/4) i = 1 # iterator from 1:NN j = 0 # iterator to keep track of current direction b = F # Initialize break as false # Loop until N^2 is reached while(i &amp;lt;= N**2){ # Break if goofed if(is.
         </div>
           <a href="/posts/ulam-spiral-in-r/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
@@ -258,10 +259,18 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
     </main>
     <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="/" >
-    &copy;  Martin's PhD Portfolio 2020 
-  </a>
-    <div>
+  	<div class ="cc-terms">
+	  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="/" >
+	    &copy;  Martin's PhD Portfolio 2020 
+	  </a>
+
+    	
+    	<a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="posts/code-of-conduct">Terms of Use</a>
+    	
+
+	</div>
+
+  	<div>
 
 
 
@@ -313,6 +322,15 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
 
 
 </div>
+
+
+    	<div class = "netlify-light">
+			<a href="https://www.netlify.com">
+			  <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
+			</a>
+    	</div>
+
+
   </div>
 </footer>
 

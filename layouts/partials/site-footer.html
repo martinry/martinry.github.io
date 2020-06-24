@@ -1,8 +1,25 @@
 <footer class="{{ .Site.Params.background_color_class | default "bg-black" }} bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="{{ .Site.BaseURL }}" >
-    &copy; {{ with .Site.Copyright | default .Site.Title }} {{ . | safeHTML }} {{ now.Format "2006"}} {{ end }}
-  </a>
-    <div>{{ partial "social-follow.html" . }}</div>
+  	<div class ="cc-terms">
+	  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="{{ .Site.BaseURL }}" >
+	    &copy; {{ with .Site.Copyright | default .Site.Title }} {{ . | safeHTML }} {{ now.Format "2006"}} {{ end }}
+	  </a>
+
+    	{{ range .Site.Params.footer.quicklinks }}
+    	<a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="{{ .link }}">{{ .text }}</a>
+    	{{ end }}
+
+	</div>
+
+  	<div>{{ partial "social-follow.html" . }}</div>
+
+
+    	<div class = "netlify-light">
+			<a href="https://www.netlify.com">
+			  <img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
+			</a>
+    	</div>
+
+
   </div>
 </footer>
