@@ -1,0 +1,207 @@
+---
+title: How I made this blog
+author: Martin Rydén
+date: '2020-06-18'
+slug: how-i-made-this-blog
+categories: []
+tags:
+  - howto
+description: ''
+output:
+  blogdown::html_page:
+    highlight: espresso
+---
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #2a211c;
+    color: #bdae9d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #bdae9d;  padding-left: 4px; }
+div.sourceCode
+  { color: #bdae9d; background-color: #2a211c; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ffff00; } /* Alert */
+code span.an { color: #0066ff; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #44aa43; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #43a8ed; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #049b0a; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #0066ff; font-weight: bold; font-style: italic; } /* Comment */
+code span.do { color: #0066ff; font-style: italic; } /* Documentation */
+code span.dt { text-decoration: underline; } /* DataType */
+code span.dv { color: #44aa43; } /* DecVal */
+code span.er { color: #ffff00; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #44aa43; } /* Float */
+code span.fu { color: #ff9358; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #0066ff; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #43a8ed; font-weight: bold; } /* Keyword */
+code span.op { } /* Operator */
+code span.pp { font-weight: bold; } /* Preprocessor */
+code span.sc { color: #049b0a; } /* SpecialChar */
+code span.ss { color: #049b0a; } /* SpecialString */
+code span.st { color: #049b0a; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #049b0a; } /* VerbatimString */
+code span.wa { color: #ffff00; font-weight: bold; } /* Warning */
+</style>
+
+
+<div id="github" class="section level2">
+<h2>Github</h2>
+<ul>
+<li>Create a new Github repository (or Github pages repo by naming it username.github.io)
+<ul>
+<li>Check “Initialize this repository with a README”</li>
+<li>Add a license</li>
+</ul></li>
+</ul>
+<p>Clone your repo to your home dir:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">cd</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">git</span> clone https://github.com/martinry/martinry.github.io.git</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="bu">cd</span> martinry.github.io</a></code></pre></div>
+</div>
+<div id="install-hugo" class="section level2">
+<h2>Install Hugo</h2>
+<p>Mac:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">brew</span> install hugo</a></code></pre></div>
+<p>Linux:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">sudo</span> apt-get install hugo</a></code></pre></div>
+</div>
+<div id="create-a-new-hugo-project" class="section level2">
+<h2>Create a new Hugo project</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># New project</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="ex">hugo</span> new site ./ --force <span class="co"># --force to write to existing dir</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"># Add a theme</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="fu">git</span> submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke</a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="bu">echo</span> <span class="st">&#39;theme = &quot;ananke&quot;&#39;</span> <span class="op">&gt;&gt;</span> config.toml</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co"># Open config</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="fu">nano</span> config.toml</a></code></pre></div>
+<p>Add some information to config.toml, here’s how my file looks:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">baseURL</span> = <span class="st">&quot;https://martinry.netlify.app/&quot;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="ex">languageCode</span> = <span class="st">&quot;en-us&quot;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="ex">title</span> = <span class="st">&quot;My PhD Portfolio&quot;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="ex">theme</span> = <span class="st">&quot;ananke&quot;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">[<span class="ex">params</span>]</a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="ex">description</span> = <span class="st">&quot;Just tryin&#39; to make a change :/&quot;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="ex">github</span>  = <span class="st">&quot;https://github.com/martinry&quot;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="ex">linkedin</span> = <span class="st">&quot;https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/&quot;</span></a>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="ex">twitter</span> = <span class="st">&quot;https://twitter.com/martinryden89&quot;</span></a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="ex">instagram</span> = <span class="st">&quot;https://www.instagram.com/maartinry/&quot;</span></a>
+<a class="sourceLine" id="cb5-11" title="11">    <span class="ex">background_color_class</span> = <span class="st">&quot;bg-near-black&quot;</span></a></code></pre></div>
+</div>
+<div id="connect-to-netlify" class="section level2">
+<h2>Connect to Netlify</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Create and edit netlify.toml</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="fu">nano</span> netlify.toml</a></code></pre></div>
+<p>Add the following content:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1">[<span class="ex">build</span>]</a>
+<a class="sourceLine" id="cb7-2" title="2"> <span class="ex">publish</span> = <span class="st">&quot;public&quot;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"> <span class="bu">command</span> = <span class="st">&quot;hugo --gc --minify&quot;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5">[<span class="ex">context.production.environment</span>]</a>
+<a class="sourceLine" id="cb7-6" title="6"> <span class="ex">HUGO_VERSION</span> = <span class="st">&quot;0.72.0&quot;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"> <span class="ex">HUGO_ENV</span> = <span class="st">&quot;production&quot;</span></a>
+<a class="sourceLine" id="cb7-8" title="8"> <span class="ex">HUGO_ENABLEGITINFO</span> = <span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb7-9" title="9"></a>
+<a class="sourceLine" id="cb7-10" title="10">[<span class="ex">context.split1</span>]</a>
+<a class="sourceLine" id="cb7-11" title="11"> <span class="bu">command</span> = <span class="st">&quot;hugo --gc --minify --enableGitInfo&quot;</span></a>
+<a class="sourceLine" id="cb7-12" title="12"></a>
+<a class="sourceLine" id="cb7-13" title="13">[<span class="ex">context.split1.environment</span>]</a>
+<a class="sourceLine" id="cb7-14" title="14"> <span class="ex">HUGO_VERSION</span> = <span class="st">&quot;0.72.0&quot;</span></a>
+<a class="sourceLine" id="cb7-15" title="15"> <span class="ex">HUGO_ENV</span> = <span class="st">&quot;production&quot;</span></a>
+<a class="sourceLine" id="cb7-16" title="16"></a>
+<a class="sourceLine" id="cb7-17" title="17">[<span class="ex">context.deploy-preview</span>]</a>
+<a class="sourceLine" id="cb7-18" title="18"> <span class="bu">command</span> = <span class="st">&quot;hugo --gc --minify --buildFuture -b </span><span class="va">$DEPLOY_PRIME_URL</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb7-19" title="19"></a>
+<a class="sourceLine" id="cb7-20" title="20">[<span class="ex">context.deploy-preview.environment</span>]</a>
+<a class="sourceLine" id="cb7-21" title="21"> <span class="ex">HUGO_VERSION</span> = <span class="st">&quot;0.72.0&quot;</span></a>
+<a class="sourceLine" id="cb7-22" title="22"></a>
+<a class="sourceLine" id="cb7-23" title="23">[<span class="ex">context.branch-deploy</span>]</a>
+<a class="sourceLine" id="cb7-24" title="24"> <span class="bu">command</span> = <span class="st">&quot;hugo --gc --minify -b </span><span class="va">$DEPLOY_PRIME_URL</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb7-25" title="25"></a>
+<a class="sourceLine" id="cb7-26" title="26">[<span class="ex">context.branch-deploy.environment</span>]</a>
+<a class="sourceLine" id="cb7-27" title="27"> <span class="ex">HUGO_VERSION</span> = <span class="st">&quot;0.72.0&quot;</span></a>
+<a class="sourceLine" id="cb7-28" title="28"></a>
+<a class="sourceLine" id="cb7-29" title="29">[<span class="ex">context.next.environment</span>]</a>
+<a class="sourceLine" id="cb7-30" title="30"> <span class="ex">HUGO_ENABLEGITINFO</span> = <span class="st">&quot;true&quot;</span></a></code></pre></div>
+<ul>
+<li>Go to <a href="https://www.netlify.com/" class="uri">https://www.netlify.com/</a></li>
+<li>Sign up with Github</li>
+<li>New site from Git</li>
+<li>Select Github</li>
+<li>Authorize, and select your repository</li>
+<li>Set “Build command” to hugo –gc –minify</li>
+<li>Set “Publish directory” to public</li>
+<li>Click deploy site</li>
+<li>Click Site settings, then Change site name, and pick one to your liking</li>
+</ul>
+</div>
+<div id="writing-blog-posts-in-rmarkdown" class="section level2">
+<h2>Writing blog posts in Rmarkdown</h2>
+<p>In Rstudio:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;rstudio/blogdown&#39;</span>)</a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co"># alternatively</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="kw">install.packages</span>(<span class="st">&#39;blogdown&#39;</span>)</a>
+<a class="sourceLine" id="cb8-5" title="5"></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="kw">setwd</span>(<span class="st">&quot;~/martinry.github.io/&quot;</span>)</a>
+<a class="sourceLine" id="cb8-7" title="7"></a>
+<a class="sourceLine" id="cb8-8" title="8">blogdown<span class="op">:::</span><span class="kw">serve_site</span>() <span class="co"># Build and render site locally</span></a>
+<a class="sourceLine" id="cb8-9" title="9">blogdown<span class="op">:::</span><span class="kw">new_post_addin</span>() <span class="co"># Open form to create post</span></a></code></pre></div>
+<ul>
+<li>In th form, fill in the necessary fields, change subdirectory to posts and the format to RMarkdown (.Rmd)</li>
+<li>Change “draft” to false</li>
+</ul>
+<p>The result should look something like:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="op">---</span></a>
+<a class="sourceLine" id="cb9-2" title="2">title<span class="op">:</span><span class="st"> </span>Rmarkdown test</a>
+<a class="sourceLine" id="cb9-3" title="3">author<span class="op">:</span><span class="st"> </span>Martin Rydén</a>
+<a class="sourceLine" id="cb9-4" title="4">date<span class="op">:</span><span class="st"> &#39;2020-06-16&#39;</span></a>
+<a class="sourceLine" id="cb9-5" title="5">slug<span class="op">:</span><span class="st"> </span>rmarkdown<span class="op">-</span>test</a>
+<a class="sourceLine" id="cb9-6" title="6">categories<span class="op">:</span><span class="st"> </span>[]</a>
+<a class="sourceLine" id="cb9-7" title="7">tags<span class="op">:</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="st">  </span><span class="op">-</span><span class="st"> </span>rmarkdown</a>
+<a class="sourceLine" id="cb9-9" title="9">draft<span class="op">:</span><span class="st"> </span>false</a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="op">---</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="st">    </span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="co">## Here is a title</span></a>
+<a class="sourceLine" id="cb9-13" title="13">Here is some content</a></code></pre></div>
+<p>Go back to the terminal and type:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">git</span> add ./</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="fu">git</span> commit -m <span class="st">&quot;First post&quot;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="fu">git</span> push</a></code></pre></div>
+<p>Within seconds, your site is deployed to
+<a href="https://sitename.netlify.app" class="uri">https://sitename.netlify.app</a></p>
+</div>

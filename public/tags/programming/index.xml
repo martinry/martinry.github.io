@@ -1,25 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>programming on Martin R</title>
-    <link>/tags/programming/</link>
-    <description>Recent content in programming on Martin R</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>© Copyright notice</copyright>
-    <lastBuildDate>Thu, 18 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Ulam spiral in R</title>
-      <link>/posts/ulam-spiral-in-r/</link>
-      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/ulam-spiral-in-r/</guid>
-      <description>a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.</description>
-    </item>
-    
-  </channel>
-</rss>

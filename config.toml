@@ -1,71 +1,24 @@
 baseURL = "https://martinry.netlify.app/"
 languageCode = "en-us"
-title = "Martin R"
+title = "My PhD Portfolio"
 theme = "gohugo-theme-ananke"
-paginate = 5
 
-copyright = "© Copyright notice"
+DefaultContentLanguage = "en"
+SectionPagesMenu = "main"
+Paginate = 10 # this is set low for demonstrating with dummy content. Set to a higher number
+googleAnalytics = ""
+enableRobotsTXT = true
 
-# Enable syntax highlighting.
-pygmentsstyle = "solarized-dark"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
-
-summaryLength = 20
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
 
 [params]
-	subtitle = "My PhD portfolio"
-	disableDisqusTypes = ["page"]
-	featherIconsCDN = true
-	mode = "auto" # "dark", "auto", "light"
-	# customCSS = "css/custom.css"  # Custom CSS applied to default styles.
-	# customDarkCSS = "css/custom-dark.css"  # Custom styles applied to dark mode css.
-	# customJS = ["https://code.jquery.com/jquery-3.4.1.js", "js/custom1.js"]  # Custom JS scripts.
-
-[[menu.main]]
-name = "Home"
-url = "/"
-weight = 1
-
-[[menu.main]]
-name = "All posts"
-url = "/posts"
-weight = 2
-
-[[menu.main]]
-name = "About"
-url = "/about"
-weight = 3
-
-[[menu.main]]
-name = "Tags"
-url = "/tags"
-weight = 4
-
-[[params.social]]
-name = "Github"
-icon = "github"
-url = "https://github.com/martinry"
-
-[[params.social]]
-name = "LinkedIn"
-icon = "linkedin"
-url = "https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/"
-
-[[params.social]]
-name = "Twitter"
-icon = "twitter"
-url = "https://twitter.com/martinryden89"
-
-[[params.social]]
-name = "Instagram"
-icon = "instagram"
-url = "https://www.instagram.com/maartinry/"
-
-[[params.social]]
-name = "RSS"
-icon = "rss"
-url = "/index.xml"
-
-[taxonomies]
-   tag = "tags"
+    description = "Just tryin' to make a change :/"
+    github  = "https://github.com/martinry"
+    linkedin = "https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/"
+    twitter = "https://twitter.com/martinryden89"
+    instagram = "https://www.instagram.com/maartinry/"
+    background_color_class = "bg-near-black"
+    featured_image = "/images/gohugo-default-sample-hero-image.jpg"
