@@ -11,6 +11,12 @@ noClasses = false
 unsafe = true  # enable raw HTML in Markdown
 
 [params]
+description = "Just tryin' to make a change :/"
+github  = "https://github.com/martinry"
+linkedin = "https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/"
+twitter = "https://twitter.com/martinryden89"
+instagram = "https://www.instagram.com/maartinry/"
+background_color_class = "bg-near-black"
 style = "auto"  # default: auto. light: light theme, dark: dark theme, auto: based on system.
 dateFormat = "Jan 02, 2006"  # if unset, default is "2006-01-02"
 readingTime = false  # show reading time after article date
@@ -20,12 +26,3 @@ slogan = "100% JavaScript-free"
 
 [params.assets]
 css = ["css/fonts.css"]
-
-[params]
-    description = "Just tryin' to make a change :/"
-    github  = "https://github.com/martinry"
-    linkedin = "https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/"
-    twitter = "https://twitter.com/martinryden89"
-    instagram = "https://www.instagram.com/maartinry/"
-    background_color_class = "bg-near-black"
-
