@@ -14,19 +14,19 @@
     
     <item>
       <title>How I made this blog</title>
-      <link>/post/how-i-made-this-blog/</link>
+      <link>/posts/how-i-made-this-blog/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/how-i-made-this-blog/</guid>
+      <guid>/posts/how-i-made-this-blog/</guid>
       <description>GithubCreate a new Github repository (or Github pages repo by naming it username.github.io)Check “Initialize this repository with a README”Add a licenseClone your repo to your home dir:</description>
     </item>
     
     <item>
       <title>Ulam spiral in R</title>
-      <link>/post/ulam-spiral-in-r/</link>
+      <link>/posts/ulam-spiral-in-r/</link>
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/ulam-spiral-in-r/</guid>
+      <guid>/posts/ulam-spiral-in-r/</guid>
       <description>a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.</description>
     </item>
     

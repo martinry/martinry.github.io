@@ -1,7 +1,7 @@
 baseURL = "https://martinry.netlify.app/"
 languageCode = "en-us"
 title = "Martin R"
-theme = "ezhil"
+theme = "gohugo-theme-ananke"
 paginate = 5
 
 copyright = "© Copyright notice"
