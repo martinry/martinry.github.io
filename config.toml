@@ -1,7 +1,8 @@
 baseURL = "https://martinry.netlify.app/"
 languageCode = "en-us"
-title = "~/"
+title = "Martin R"
 theme = "ezhil"
+paginate = 5
 
 copyright = "© Copyright notice"
 
@@ -9,6 +10,17 @@ copyright = "© Copyright notice"
 pygmentsstyle = "solarized-dark"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
+
+summaryLength = 20
+
+[params]
+	subtitle = "Clean and minimal personal [blog theme for Hugo](https://github.com/vividvilla/ezhil)"
+	disableDisqusTypes = ["page"]
+	featherIconsCDN = true
+	mode = "auto" # "dark", "auto", "light"
+	# customCSS = "css/custom.css"  # Custom CSS applied to default styles.
+	# customDarkCSS = "css/custom-dark.css"  # Custom styles applied to dark mode css.
+	# customJS = ["https://code.jquery.com/jquery-3.4.1.js", "js/custom1.js"]  # Custom JS scripts.
 
 [[menu.main]]
 name = "Home"

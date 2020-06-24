@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>~/</title>
+    <title>Martin R</title>
     <link>/</link>
-    <description>Recent content on ~/</description>
+    <description>Recent content on Martin R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Copyright notice</copyright>
@@ -18,10 +18,7 @@
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/how-i-made-this-blog/</guid>
-      <description>GithubCreate a new Github repository (or Github pages repo by naming it username.github.io)Check “Initialize this repository with a README”Add a licenseClone your repo to your home dir:
-cdgit clone https://github.com/martinry/martinry.github.io.gitcd martinry.github.ioInstall HugoMac:
-brew install hugoLinux:
-sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site ./ --force # --force to write to existing dir# Add a themegit submodule add https://github.</description>
+      <description>GithubCreate a new Github repository (or Github pages repo by naming it username.github.io)Check “Initialize this repository with a README”Add a licenseClone your repo to your home dir:</description>
     </item>
     
     <item>
@@ -30,7 +27,7 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
       <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/ulam-spiral-in-r/</guid>
-      <description>a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.2em; }.sourceCode { overflow: visible; }code.sourceCode { white-space: pre; position: relative; }div.sourceCode { margin: 1em 0; }pre.sourceCode { margin: 0; }@media screen {div.sourceCode { overflow: auto; }}@media print {code.sourceCode { white-space: pre-wrap; }a.sourceLine { text-indent: -1em; padding-left: 1em; }}pre.</description>
+      <description>a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.</description>
     </item>
     
     <item>
@@ -39,7 +36,7 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
       <pubDate>Fri, 03 Apr 2015 02:13:50 +0000</pubDate>
       
       <guid>/page/about/</guid>
-      <description>About Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec dolor in magna lobortis egestas. Suspendisse eu erat tempor, tristique neque eu, convallis nulla. Curabitur vel bibendum lacus, at semper mauris. Suspendisse aliquet commodo ex, sed sagittis metus aliquam id. Maecenas feugiat rutrum lorem vel imperdiet. Nullam ornare lectus ut enim finibus, et porttitor mi tincidunt. Aenean lacinia, leo quis vehicula eleifend, quam libero sagittis erat, at euismod augue mauris et sapien.</description>
+      <description>About Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec dolor in magna lobortis egestas. Suspendisse eu erat tempor, tristique neque eu, convallis nulla.</description>
     </item>
     
     <item>
@@ -48,7 +45,7 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
       <pubDate>Fri, 03 Apr 2015 02:13:50 +0000</pubDate>
       
       <guid>/page/contact/</guid>
-      <description>Contact Aenean ipsum justo, semper eu nisl ut, pretium tincidunt sem. Praesent et diam sit amet lacus lobortis dictum a id lacus. Quisque hendrerit sit amet turpis eu varius. Ut id lorem ac felis ultrices tincidunt. Pellentesque consequat arcu ac fringilla imperdiet. Phasellus pellentesque, sapien non pulvinar blandit, sapien ante aliquet felis, vel porttitor sapien ante in lacus. Fusce non urna aliquet, malesuada nibh vel, luctus urna. Phasellus ut lacus molestie, varius purus quis, malesuada lorem.</description>
+      <description>Contact Aenean ipsum justo, semper eu nisl ut, pretium tincidunt sem. Praesent et diam sit amet lacus lobortis dictum a id lacus.</description>
     </item>
     
     <item>
@@ -57,7 +54,7 @@ sudo apt-get install hugoCreate a new Hugo project# New projecthugo new site
       <pubDate>Tue, 18 Nov 2014 02:13:50 +0000</pubDate>
       
       <guid>/project/my-awesome-project/</guid>
-      <description>About project Aenean ipsum justo, semper eu nisl ut, pretium tincidunt sem. Praesent et diam sit amet lacus lobortis dictum a id lacus. Quisque hendrerit sit amet turpis eu varius. Ut id lorem ac felis ultrices tincidunt. Pellentesque consequat arcu ac fringilla imperdiet. Phasellus pellentesque, sapien non pulvinar blandit, sapien ante aliquet felis, vel porttitor sapien ante in lacus. Fusce non urna aliquet, malesuada nibh vel, luctus urna. Phasellus ut lacus molestie, varius purus quis, malesuada lorem.</description>
+      <description>About project Aenean ipsum justo, semper eu nisl ut, pretium tincidunt sem. Praesent et diam sit amet lacus lobortis dictum a id lacus.</description>
     </item>
     
   </channel>

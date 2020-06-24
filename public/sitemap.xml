@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>/</loc>
+    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
     <lastmod>2020-06-18T00:00:00+00:00</lastmod>
   </url>
@@ -34,11 +39,6 @@
   
   <url>
     <loc>/post/ulam-spiral-in-r/</loc>
-    <lastmod>2020-06-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2020-06-18T00:00:00+00:00</lastmod>
   </url>
   
