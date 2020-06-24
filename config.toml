@@ -2,9 +2,6 @@ baseURL = "https://martinry.netlify.app/"
 languageCode = "en-us"
 title = "~/"
 theme = "ghostwriter"
-pygmentsUseClasses = true
-pygmentsCodefences = true
-
 
 [params]
     description = "Just tryin' to make a change :/"
