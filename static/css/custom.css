@@ -29,6 +29,7 @@ pre, .pre  {
 
 .cc-terms{
 	display: grid;
+	text-align: center;
 }
 
 .netlify-light{
