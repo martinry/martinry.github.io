@@ -7,9 +7,6 @@ categories: []
 tags:
   - howto
 description: ''
-output:
-  blogdown::html_page:
-    highlight: tango
 ---
 
 
