@@ -226,4 +226,4 @@ So, what have we learnt? We can programmatically collect data from a website by 
 
 When we have meditated on today's efforts, and finished studying the function of proteins, it is time to test our knowledge.
 
-[Go to Part 2](/posts/2020-06-26-the-quiz-part-2.en.html)
+[Go to Part 2](/posts/2020-06-27-the-quiz-part-2.en.html)

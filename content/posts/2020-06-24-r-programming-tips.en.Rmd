@@ -13,6 +13,7 @@ featured_image: ''
 output:
   blogdown::html_page:
     toc: true
+draft: true
 ---
 
 # 1.0 Rstudio tips
