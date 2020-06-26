@@ -10,8 +10,8 @@ tags:
 
 
 
-<div id="github" class="section level2">
-<h2>Github</h2>
+<div id="github" class="section level3">
+<h3>Github</h3>
 <ul>
 <li>Create a new Github repository (or Github pages repo by naming it username.github.io)
 <ul>
@@ -24,15 +24,15 @@ tags:
 git clone https://github.com/martinry/martinry.github.io.git
 cd martinry.github.io</code></pre>
 </div>
-<div id="install-hugo" class="section level2">
-<h2>Install Hugo</h2>
+<div id="install-hugo" class="section level3">
+<h3>Install Hugo</h3>
 <p>Mac:</p>
 <pre class="bash"><code>brew install hugo</code></pre>
 <p>Linux:</p>
 <pre class="bash"><code>sudo apt-get install hugo</code></pre>
 </div>
-<div id="create-a-new-hugo-project" class="section level2">
-<h2>Create a new Hugo project</h2>
+<div id="create-a-new-hugo-project" class="section level3">
+<h3>Create a new Hugo project</h3>
 <pre class="bash"><code># New project
 hugo new site ./ --force # --force to write to existing dir
 
@@ -70,8 +70,8 @@ enableRobotsTXT = true
     background_color_class = &quot;bg-near-black&quot;
     recent_posts_number = 5</code></pre>
 </div>
-<div id="connect-to-netlify" class="section level2">
-<h2>Connect to Netlify</h2>
+<div id="connect-to-netlify" class="section level3">
+<h3>Connect to Netlify</h3>
 <pre class="bash"><code># Create and edit netlify.toml
 nano netlify.toml</code></pre>
 <p>Add the following content:</p>
@@ -117,8 +117,9 @@ nano netlify.toml</code></pre>
 <li>Click Site settings, then Change site name, and pick one to your liking</li>
 </ul>
 </div>
-<div id="writing-blog-posts-in-rmarkdown" class="section level2">
-<h2>Writing blog posts in Rmarkdown</h2>
+<div id="writing-blog-posts-in-rmarkdown" class="section level3">
+<h3>Writing blog posts in Rmarkdown</h3>
+<p>Why do we want to do this? Rmarkdown (.Rmd) uses markdown (.md) syntax but has the capability of executing R code through embedded code chunks. The R package <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> simplifies the task of creating, organizing and rendering Rmd’s through an Rstudio addins and post templates.</p>
 <p>In Rstudio:</p>
 <pre class="r"><code>devtools::install_github(&#39;rstudio/blogdown&#39;)
 
@@ -154,4 +155,31 @@ git commit -m &quot;First post&quot;
 git push</code></pre>
 <p>Within seconds, your site is deployed to
 <a href="https://sitename.netlify.app" class="uri">https://sitename.netlify.app</a></p>
+</div>
+<div id="syntax-highlighting" class="section level3">
+<h3>Syntax highlighting</h3>
+<ul>
+<li>Go to <a href="https://highlightjs.org/download/" class="uri">https://highlightjs.org/download/</a> and download the zip archive to <code>~/Downloads</code></li>
+</ul>
+<pre class="bash"><code>cd ~/Downloads/
+unzip -qq highlight.zip -d highlightjs/
+
+# Copy the highlight pack to the theme&#39;s static js dir
+cp highlight.pack.js ~/martinry.github.io/themes/gohugo-theme-ananke/static/dist/js/
+
+# Choose a style and copy the corresponding stylesheet to he theme&#39;s static css dir
+cd styles/
+cp solarized-dark.css ~/martinry.github.io/themes/gohugo-theme-ananke/static/dist/css/
+
+# Copy the theme&#39;s layouts/ dir to your blog&#39;s base path
+cd ~/martinry.github.io/
+cp -r themes/gohugo-theme-ananke/layouts/ ./layouts
+
+cd layouts/partials/
+
+# Add the following to the top of page-header.html (the file name may differ slightly between themes)
+&lt;link rel=&quot;stylesheet&quot; href=&quot;{{&quot;dist/css/solarized-dark.css&quot; | absURL}}&quot; rel=&quot;stylesheet&quot; id=&quot;theme-stylesheet&quot;&gt; 
+&lt;script src=&quot;{{ &quot;dist/js/highlight.pack.js&quot; | absURL }}&quot;&gt;&lt;/script&gt;
+&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
+</code></pre>
 </div>

@@ -8,7 +8,7 @@ tags:
   - how-to
 ---
 
-## Github
+### Github
 
 - Create a new Github repository (or Github pages repo by naming it username.github.io)
 	- Check "Initialize this repository with a README"
@@ -21,8 +21,7 @@ git clone https://github.com/martinry/martinry.github.io.git
 cd martinry.github.io
 ```
 
-
-## Install Hugo
+### Install Hugo
 Mac:
 ```{bash, eval = F, echo = T}
 brew install hugo
@@ -33,7 +32,7 @@ Linux:
 sudo apt-get install hugo
 ```
 
-## Create a new Hugo project 
+### Create a new Hugo project 
 ```{bash, eval = F, echo = T}
 # New project
 hugo new site ./ --force # --force to write to existing dir
@@ -76,8 +75,7 @@ enableRobotsTXT = true
 	recent_posts_number = 5
 ```
 
-
-## Connect to Netlify
+### Connect to Netlify
 ```{bash, eval = F, echo = T}
 # Create and edit netlify.toml
 nano netlify.toml
@@ -115,7 +113,7 @@ Add the following content:
 
 [context.next.environment]
  HUGO_ENABLEGITINFO = "true"
- ```
+```
 
 - Go to https://www.netlify.com/
 - Sign up with Github
@@ -127,7 +125,10 @@ Add the following content:
 - Click deploy site
 - Click Site settings, then Change site name, and pick one to your liking
 
-## Writing blog posts in Rmarkdown
+### Writing blog posts in Rmarkdown
+
+Why do we want to do this? Rmarkdown (.Rmd) uses markdown (.md) syntax but has the capability of executing R code through embedded code chunks. The R package [blogdown](https://bookdown.org/yihui/blogdown/) simplifies the task of creating, organizing and rendering Rmd's through an Rstudio addins and post templates.
+
 In Rstudio:
 ```{Rscript, echo = T, eval = F}
 devtools::install_github('rstudio/blogdown')
@@ -172,3 +173,34 @@ git push
 
 Within seconds, your site is deployed to 
 https://sitename.netlify.app
+
+
+### Syntax highlighting
+
+- Go to https://highlightjs.org/download/ and download the zip archive to `~/Downloads`
+
+```{bash, eval = F, echo =T}
+cd ~/Downloads/
+unzip -qq highlight.zip -d highlightjs/
+
+# Copy the highlight pack to the theme's static js dir
+cp highlight.pack.js ~/martinry.github.io/themes/gohugo-theme-ananke/static/dist/js/
+
+# Choose a style and copy the corresponding stylesheet to he theme's static css dir
+cd styles/
+cp solarized-dark.css ~/martinry.github.io/themes/gohugo-theme-ananke/static/dist/css/
+
+# Copy the theme's layouts/ dir to your blog's base path
+cd ~/martinry.github.io/
+cp -r themes/gohugo-theme-ananke/layouts/ ./layouts
+
+cd layouts/partials/
+
+# Add the following to the top of page-header.html (the file name may differ slightly between themes)
+<link rel="stylesheet" href="{{"dist/css/solarized-dark.css" | absURL}}" rel="stylesheet" id="theme-stylesheet"> 
+<script src="{{ "dist/js/highlight.pack.js" | absURL }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+```
+
+

@@ -1,0 +1,240 @@
+---
+title: The Quiz (Part 2)
+author: Martin Rydén
+date: '2020-06-27'
+slug: the-quiz-part-2
+categories: []
+tags:
+  - how-to
+  - R
+  - programming
+  - data-mining
+  - statistics
+  - web-scraping
+  - wikipedia
+description: ''
+featured_image: ''
+draft: true
+---
+
+Now that we have gathered our knowledgebase, it is time to quiz ourselves on our knowledge.
+
+```{r, message = F}
+library(tidyverse)  # For data transformation / reshaping
+library(data.table) # For data transformation / reshaping
+library(rvest)      # For web scraping
+
+wikitable <- fread("wikitable.tsv")
+```
+
+```{r}
+# Function to clean sentences by removing some non-alphanumeric characters and removing if it's a "common" word
+clean <- function(dat){
+	dat %>%
+		tolower() %>%
+		strsplit(split = " ") %>%
+		unlist() %>% 
+		gsub("[[:punct:]]", "", .) %>% 
+		.[nchar(.) > 0]
+}
+```
+
+```{r}
+
+# Total unique words across all protein function descriptions
+words <- paste(wikitable$protein_function, collapse = " ") %>% 
+	clean()
+
+# How many unique words are there?
+n <- length(words)
+
+quiz <- function() {
+	# Select a random protein
+	random_protein <- wikitable[round(runif(1, 0, .N))]
+	
+	# The background data: the words in the current protein's function summary
+	bg <- random_protein[,"protein_function"] %>%
+		clean()
+	
+	# Number of words in bg
+	m <- length(bg)
+	
+	# Prompt question to player
+	response <- readline(prompt = paste0("What do you know about ", random_protein, "?\t")) %>% 
+		clean()
+	
+	# Number of words in response which are also in bg
+	q <- length(response[response %in% bg])
+	
+	# Total number of words in response
+	k <- length(response)
+	
+	# What is the probability of randomly selecting q words, given:
+	# - q, the number of words in response which are also in m
+	# - m, the number of words in the protein's function summary
+	# - n, the total number of words in all proteins' function summaries
+	# - k, the number of words in response
+	score <- round(phyper(q - 1, m, n - m, k, lower.tail = T), 4) * 100
+	
+	# Rate score
+	if(score > 50){
+		return(paste("Good job! Your score:", score))
+	} else {
+		return(paste("Work harder! Your score:", score))
+	}
+}
+
+```
+
+It works! But - we can cheat by simply typing words that are common in the English language:
+
+```{r, eval = F}
+quiz()
+# > What do you know about Dermatopontin?
+# > it do be like as if in a cell
+# > "Good job! Your score: 99.96"
+```
+
+:I
+
+Back to Wikipedia!
+
+https://en.wikipedia.org/wiki/Most_common_words_in_English
+
+
+<iframe width="800" height="650" scrolling="yes" frameborder="yes"  src="https://en.wikipedia.org/wiki/Most_common_words_in_English#100_most_common_words" > </iframe>
+
+
+```{r}
+wurl <- "https://en.wikipedia.org/wiki/Most_common_words_in_English"
+
+# Get table
+wtable <- wurl %>%
+	read_html %>%
+	html_nodes(xpath = '//*[@id="mw-content-text"]/div/table[1]') %>%
+	html_table()
+
+# Get words
+common <- wtable[[1]]$Word
+
+```
+
+And let's update our 'clean' function
+
+```{r}
+# Also remove "common" words
+clean <- function(dat){
+	dat %>%
+		tolower() %>%
+		strsplit(split = " ") %>%
+		unlist() %>%
+		gsub("[[:punct:]]", "", .) %>% 
+		unique() %>% 
+		.[nchar(.) > 0] %>% 
+		.[!. %in% common]
+}
+```
+
+Okay, we are ready for the second attempt.
+
+```{r}
+
+# Total unique words across all protein function descriptions
+words <- paste(wikitable$protein_function, collapse = " ") %>% 
+	clean()
+
+# How many unique words are there?
+n <- length(words)
+
+# Median number of words across function summaries
+median_words <- wikitable$protein_function %>% 
+  tolower() %>% 
+  strsplit(split = " ") %>% 
+  lengths() %>% 
+  median() %>% 
+  round()
+
+# Slightly more sophisticated version of the quiz function
+quiz <- function(protein = "random", reveal = T) {
+	
+	if(protein == "random") {
+		# Select a random protein from our knowledgebase
+		protein <- wikitable[round(runif(1, 0, .N))]
+	} else {
+		# Capitilize word and try to find in dataframe
+		protein <- tolower(protein)
+		substr(protein, 1, 1) <- toupper(substr(protein, 1, 1))
+		if(!protein %in% wikitable$title) {
+			# Throw error if name does not exist in df
+			stop("Could not find protein name")
+		}
+	}
+	
+	# The background data: the words in the current protein's function summary
+	bg <- random_protein[,"protein_function"] %>%
+		clean()
+
+	# Number of words in bg
+	m <- length(bg)
+	
+	# Prompt question to player
+	response <- readline(prompt = paste0("What do you know about ", random_protein, "?\t")) %>% 
+		clean()
+	
+	# Number of words in response which are also in bg
+	q <- length(response[response %in% bg])
+	
+	# Total number of words in response
+	k <- length(response)
+	
+	# What is the probability of randomly selecting q words, given:
+	# - q, the number of words in response which are also in m
+	# - m, the number of words in the protein's function summary
+	# - n, the total number of words in all proteins' function summaries
+	# - k, the number of words in response
+	score <- round(phyper(q - 1, m, n - m, median_words, lower.tail = T), 4) * 100
+	
+	# lower.tail = T is the same as writing 1 - phyper(...), hence we get the probability that q words are NOT randomly selected
+	
+	# Note: The proper usage of phyper is with arguments: q-1, m, n-m, k
+	# However, by using k we give an unproportionally high score if the player is lazy and gives a short answer.
+	# Instead, we'll use the median number of words across all protein function descriptions
+	# as the expected length of the response.
+	
+	# Also reveal answer?
+	answer <- ""
+	if(reveal) answer <- paste0("Answer: ", random_protein$protein_function)
+	
+	# Rate score
+	if(score > 50){
+		print(paste("Good job! Your score:", score))
+		print(answer)
+	} else {
+		print(paste("Work harder! Your score:", score))
+		print(answer)
+	}
+}
+
+```
+
+Let's try the same protein and give the same response as previously...
+
+```{r, eval = F}
+quiz(protein = "dermatopontin")
+# > What do you know about Dermatopontin?
+# > it do be like as if in a cell
+# > "Work harder! Your score: 29.42"
+
+```
+
+We get some points for knowing 'cell' but it's still an F. Let's try again with a better response.
+
+```{r, eval = F}
+quiz(protein = "dermatopontin")
+# > What do you know about Dermatopontin?
+# > enhances tgfb1 activity and accelerates collagen formation
+# > "Good job! Your score: 99.94"
+
+```
+
+Conclusion
