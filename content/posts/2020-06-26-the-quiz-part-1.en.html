@@ -75,8 +75,8 @@ featured_image: ''
 </div>
 <div id="part-1---gathering-data" class="section level3">
 <h3>Part 1 - Gathering data</h3>
-<div id="wikipedia-scraping" class="section level4">
-<h4>Wikipedia scraping</h4>
+<div id="scraping-wikipedia" class="section level4">
+<h4>Scraping Wikipedia</h4>
 <p>Our inital source of information will be <em>the</em> source of information, Wikipedia.</p>
 <p><a href="https://en.wikipedia.org/wiki/Category:Extracellular_matrix_proteins" class="uri">https://en.wikipedia.org/wiki/Category:Extracellular_matrix_proteins</a></p>
 <iframe width="700" height="500" scrolling="yes" frameborder="yes" src="https://en.wikipedia.org/wiki/Category:Extracellular_matrix_proteins#mw-pages">
@@ -113,8 +113,8 @@ get_wiki_list &lt;- function(nodes) {
 # Iterate over nodes (html elements for each protein) and fetch their title and link
 wikitable &lt;- sapply(wnodes, get_wiki_list, USE.NAMES = F, simplify = F) %&gt;% bind_rows()
 
-# Display first 10 entries
-kable(head(wikitable))</code></pre>
+# Display first 5 entries
+kable(head(wikitable, 5))</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -142,10 +142,6 @@ kable(head(wikitable))</code></pre>
 <tr class="odd">
 <td align="left">Biglycan</td>
 <td align="left">/wiki/Biglycan</td>
-</tr>
-<tr class="even">
-<td align="left">BMP binding endothelial regulator</td>
-<td align="left">/wiki/BMP_binding_endothelial_regulator</td>
 </tr>
 </tbody>
 </table>
@@ -183,9 +179,11 @@ get_uniprot_links &lt;- function(wprot){
     }
 }
 
+# Iterate over dataframe, find UniProt urls
 wikitable$uniprot &lt;- apply(wikitable, 1, get_uniprot_links)
 
-kable(head(wikitable))</code></pre>
+# Display first 5 entries
+kable(head(wikitable, 5))</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -220,19 +218,15 @@ kable(head(wikitable))</code></pre>
 <td align="left">/wiki/Biglycan</td>
 <td align="left"><a href="https://www.uniprot.org/uniprot/P21810" class="uri">https://www.uniprot.org/uniprot/P21810</a></td>
 </tr>
-<tr class="even">
-<td align="left">BMP binding endothelial regulator</td>
-<td align="left">/wiki/BMP_binding_endothelial_regulator</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/Q8N8U9" class="uri">https://www.uniprot.org/uniprot/Q8N8U9</a></td>
-</tr>
 </tbody>
 </table>
 <p>In the event that we are unable to find their UniProt id, let’s for now consider those proteins <em>not so well-studied</em> and exclude them.</p>
 </div>
-<div id="uniprot-scraping" class="section level4">
-<h4>UniProt scraping</h4>
-<p>Our next target is the “Function” element on uniprot.org entry pages. An example:</p>
-<p><img src="/images/finc.png" /><!-- --></p>
+<div id="scraping-uniprot" class="section level4">
+<h4>Scraping UniProt</h4>
+<p>Our next target is the <em>Function</em> element on uniprot.org entry pages. An example:</p>
+<p><img src="/images/finc.png" /><!-- -->
+<sub>Image source: <a href="https://www.uniprot.org/uniprot/P02751" class="uri">https://www.uniprot.org/uniprot/P02751</a></sub></p>
 <p>Similarly to before, we’ll specify the xpath of the web-page to extract the content we are looking for.</p>
 <pre class="r"><code># Exclude linkless proteins
 wikitable &lt;- wikitable[!is.na(wikitable$uniprot),]
@@ -268,13 +262,26 @@ wikitable$organism &lt;- unlist(sapply(pinfo, FUN = function(x) x[&quot;organism
 wikitable$protein_function &lt;- gsub(&#39;[0-9] Publications|\\.By similarity|\\.S|\\.s|  .*&#39;, &quot;&quot;, wikitable$protein_function)
 wikitable$protein_function &lt;- gsub(&#39;(By similarity)|(PubMed:[0-9])|\r|\n|&lt;.*.&gt;|\\[.*.\\]|([0-9])&#39;, &quot;&quot;, wikitable$protein_function)</code></pre>
 <p>Now let’s take a look at what species we have harvested!</p>
-<pre class="r"><code>table(wikitable$organism)</code></pre>
-<pre><code>## 
-##                                             Homo sapiens (Human) 
-##                                                               60 
-## Pinctada fucata (Akoya pearl oyster) (Pinctada imbricata fucata) 
-##                                                                1</code></pre>
-<p>60 human proteins and 1 lone oyster.</p>
+<pre class="r"><code>kable(table(wikitable$organism), col.names = c(&quot;Organism&quot;, &quot;Frequency&quot;))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Organism</th>
+<th align="right">Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Homo sapiens (Human)</td>
+<td align="right">60</td>
+</tr>
+<tr class="even">
+<td align="left">Pinctada fucata (Akoya pearl oyster) (Pinctada imbricata fucata)</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>60 human proteins and one lone oyster.</p>
 <p>:I</p>
 <p>Sadly, we must exclude him.</p>
 <pre class="r"><code># Convert to data.table
@@ -293,80 +300,50 @@ wikitable &lt;- wikitable[!startsWith(protein_function, &quot;Complete GO annota
 fwrite(wikitable, &quot;wikitable.tsv&quot;, quote = F, sep = &#39;\t&#39;)
 
 # Show entries that have short descriptions
-kable(wikitable[nchar(protein_function) &lt; 70])</code></pre>
+kable(wikitable[nchar(protein_function) &lt; 70, c(&quot;title&quot;, &quot;protein_function&quot;)])</code></pre>
 <table>
 <thead>
 <tr class="header">
 <th align="left">title</th>
-<th align="left">link</th>
-<th align="left">uniprot</th>
 <th align="left">protein_function</th>
-<th align="left">organism</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">Biglycan</td>
-<td align="left">/wiki/Biglycan</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/P21810" class="uri">https://www.uniprot.org/uniprot/P21810</a></td>
 <td align="left">May be involved in collagen fiber assembly</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 <tr class="even">
 <td align="left">CCDC80</td>
-<td align="left">/wiki/CCDC80</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/Q76M96" class="uri">https://www.uniprot.org/uniprot/Q76M96</a></td>
 <td align="left">Promotes cell adhesion and matrix assembly</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 <tr class="odd">
 <td align="left">CRISPLD2</td>
-<td align="left">/wiki/CRISPLD2</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/Q9H0B8" class="uri">https://www.uniprot.org/uniprot/Q9H0B8</a></td>
 <td align="left">Promotes matrix assembly</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 <tr class="even">
 <td align="left">Decorin</td>
-<td align="left">/wiki/Decorin</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/P07585" class="uri">https://www.uniprot.org/uniprot/P07585</a></td>
 <td align="left">May affect the rate of fibrils formation.</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 <tr class="odd">
 <td align="left">Extracellular matrix protein 2</td>
-<td align="left">/wiki/Extracellular_matrix_protein_2</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/O94769" class="uri">https://www.uniprot.org/uniprot/O94769</a></td>
 <td align="left">Promotes matrix assembly and cell adhesiveness</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 <tr class="even">
 <td align="left">Matrilin-2</td>
-<td align="left">/wiki/Matrilin-2</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/O00339" class="uri">https://www.uniprot.org/uniprot/O00339</a></td>
 <td align="left">Involved in matrix assembly</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 <tr class="odd">
 <td align="left">Osteoglycin</td>
-<td align="left">/wiki/Osteoglycin</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/P20774" class="uri">https://www.uniprot.org/uniprot/P20774</a></td>
 <td align="left">Induces bone formation in conjunction with TGF-beta- or TGF-beta-.</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 <tr class="even">
 <td align="left">Tenomodulin</td>
-<td align="left">/wiki/Tenomodulin</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/Q9H2S6" class="uri">https://www.uniprot.org/uniprot/Q9H2S6</a></td>
 <td align="left">May be an angiogenesis inhibitor.</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 <tr class="odd">
 <td align="left">VWA2</td>
-<td align="left">/wiki/VWA2</td>
-<td align="left"><a href="https://www.uniprot.org/uniprot/Q5GFL6" class="uri">https://www.uniprot.org/uniprot/Q5GFL6</a></td>
 <td align="left">May be used as a serological marker for colon neoplasia.</td>
-<td align="left">Homo sapiens (Human)</td>
 </tr>
 </tbody>
 </table>
@@ -374,7 +351,7 @@ kable(wikitable[nchar(protein_function) &lt; 70])</code></pre>
 </div>
 <div id="conclusion---part-1" class="section level3">
 <h3>Conclusion - Part 1</h3>
-<p>So, what have we learnt? We can programmatically collect data from a website by specifying a url and a html xpath. In this case, we investigated the molecular function of some proteins and compiled this information into a dataframe. While it may seem like a tedious approach for a simple task, much of the code we have written can be used in future projects where we need to collect and clean data.</p>
+<p>So, what have we learned? We can programmatically collect data from a website by specifying a url and a html xpath. In this case, we investigated the molecular function of some proteins and compiled this information into a dataframe. While it may seem like a tedious approach for a simple task, much of the code we have written can be used in future projects where we need to collect and clean data.</p>
 <p>When we have meditated on today’s efforts, and finished studying the function of proteins, it is time to test our knowledge.</p>
 <p><a href="/posts/2020-06-27-the-quiz-part-2.en.html">Go to Part 2</a></p>
 </div>

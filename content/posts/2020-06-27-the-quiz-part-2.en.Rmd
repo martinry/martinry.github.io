@@ -164,21 +164,22 @@ quiz <- function(protein = "random", reveal = T) {
 		# Capitilize word and try to find in dataframe
 		protein <- tolower(protein)
 		substr(protein, 1, 1) <- toupper(substr(protein, 1, 1))
-		if(!protein %in% wikitable$title) {
+		protein <- wikitable[title == protein]
+		if(!protein$title %in% wikitable$title) {
 			# Throw error if name does not exist in df
 			stop("Could not find protein name")
 		}
 	}
 	
 	# The background data: the words in the current protein's function summary
-	bg <- random_protein[,"protein_function"] %>%
+	bg <- protein[,"protein_function"] %>%
 		clean()
 
 	# Number of words in bg
 	m <- length(bg)
 	
 	# Prompt question to player
-	response <- readline(prompt = paste0("What do you know about ", random_protein, "?\t")) %>% 
+	response <- readline(prompt = paste0("What do you know about ", protein, "?\t")) %>% 
 		clean()
 	
 	# Number of words in response which are also in bg
@@ -192,7 +193,23 @@ quiz <- function(protein = "random", reveal = T) {
 	# - m, the number of words in the protein's function summary
 	# - n, the total number of words in all proteins' function summaries
 	# - k, the number of words in response
-	score <- round(phyper(q - 1, m, n - m, median_words, lower.tail = T), 4) * 100
+	score <- phyper(q-1, m, n - m, k, lower.tail = F)
+	
+	successes = length(response[response %in% bg])
+	failures = length(response[!response %in% bg])
+	
+	
+	# there are m correct words in a total of n words (n - m wrong)
+	# 
+	
+	
+	# Given 20 words to describe the protein,
+	# what is the probability of having 2 correct guesses
+	# considering a total 
+	
+	# The probability of out of 656 words (not accounting for -m)
+	
+	
 	
 	# lower.tail = T is the same as writing 1 - phyper(...), hence we get the probability that q words are NOT randomly selected
 	
@@ -203,7 +220,7 @@ quiz <- function(protein = "random", reveal = T) {
 	
 	# Also reveal answer?
 	answer <- ""
-	if(reveal) answer <- paste0("Answer: ", random_protein$protein_function)
+	if(reveal) answer <- paste0("Answer: ", protein$protein_function)
 	
 	# Rate score
 	if(score > 50){
@@ -237,4 +254,10 @@ quiz(protein = "dermatopontin")
 
 ```
 
-Conclusion
+
+
+### Conclusion - Part 2
+
+We cleaned up the output from Part 1 and used it as content for a small game. A quiz, that utilized a probability distribution to determine if the player's description of a protein was better or worse than a set of randomly drawn words from the population.
+
+In Part 3 we will attempt to generalize the concept, and create *the omni-quiz*.

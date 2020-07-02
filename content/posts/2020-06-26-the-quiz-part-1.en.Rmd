@@ -43,7 +43,7 @@ Given a list of protein names, describe their molecular function using a data-mi
 
 ### Part 1 - Gathering data
 
-#### Wikipedia scraping
+#### Scraping Wikipedia
 
 Our inital source of information will be *the* source of information, Wikipedia.
 
@@ -85,8 +85,8 @@ get_wiki_list <- function(nodes) {
 # Iterate over nodes (html elements for each protein) and fetch their title and link
 wikitable <- sapply(wnodes, get_wiki_list, USE.NAMES = F, simplify = F) %>% bind_rows()
 
-# Display first 10 entries
-kable(head(wikitable))
+# Display first 5 entries
+kable(head(wikitable, 5))
 
 ```
 
@@ -128,21 +128,24 @@ get_uniprot_links <- function(wprot){
 	}
 }
 
+# Iterate over dataframe, find UniProt urls
 wikitable$uniprot <- apply(wikitable, 1, get_uniprot_links)
 
-kable(head(wikitable))
+# Display first 5 entries
+kable(head(wikitable, 5))
 
 ```
 
 In the event that we are unable to find their UniProt id, let's for now consider those proteins *not so well-studied* and exclude them.
 
-#### UniProt scraping
+#### Scraping UniProt
 
-Our next target is the "Function" element on uniprot.org entry pages. An example:
+Our next target is the *Function* element on uniprot.org entry pages. An example:
 
 ```{r, echo = F}
 knitr::include_graphics('/images/finc.png', error = FALSE)
 ```
+<sub>Image source: https://www.uniprot.org/uniprot/P02751</sub>
 
 Similarly to before, we'll specify the xpath of the web-page to extract the content we are looking for.
 
@@ -188,11 +191,11 @@ wikitable$protein_function <- gsub('(By similarity)|(PubMed:[0-9])|\r|\n|<.*.>|\
 Now let's take a look at what species we have harvested!
 
 ```{r}
-table(wikitable$organism)
+kable(table(wikitable$organism), col.names = c("Organism", "Frequency"))
 
 ```
 
-60 human proteins and 1 lone oyster.
+60 human proteins and one lone oyster.
 
 :I
 
@@ -216,13 +219,13 @@ wikitable <- wikitable[!startsWith(protein_function, "Complete GO annotation on 
 fwrite(wikitable, "wikitable.tsv", quote = F, sep = '\t')
 
 # Show entries that have short descriptions
-kable(wikitable[nchar(protein_function) < 70])
+kable(wikitable[nchar(protein_function) < 70, c("title", "protein_function")])
 
 ```
 
 ### Conclusion - Part 1
 
-So, what have we learnt? We can programmatically collect data from a website by specifying a url and a html xpath. In this case, we investigated the molecular function of some proteins and compiled this information into a dataframe. While it may seem like a tedious approach for a simple task, much of the code we have written can be used in future projects where we need to collect and clean data.
+So, what have we learned? We can programmatically collect data from a website by specifying a url and a html xpath. In this case, we investigated the molecular function of some proteins and compiled this information into a dataframe. While it may seem like a tedious approach for a simple task, much of the code we have written can be used in future projects where we need to collect and clean data.
 
 When we have meditated on today's efforts, and finished studying the function of proteins, it is time to test our knowledge.
 
