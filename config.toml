@@ -27,5 +27,5 @@ enableRobotsTXT = true
     custom_css = ["css/custom.css"]
 
 [[params.footer.quicklinks]]
-    text = "Terms of Use"
+    text = "Code of Conduct"
     link = "posts/code-of-conduct"
