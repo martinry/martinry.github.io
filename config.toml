@@ -1,4 +1,4 @@
-baseURL = "https://martinry.netlify.app/"
+baseURL = "https://boring-knuth-25c4c8.netlify.app/"
 languageCode = "en-us"
 title = "Martin Rydén's PhD Portfolio"
 theme = "gohugo-theme-ananke"
