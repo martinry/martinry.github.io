@@ -1,0 +1,232 @@
+---
+title: The Quiz (Part 1)
+author: Martin Rydén
+date: '2020-06-26'
+slug: the-quiz-part-1
+categories: []
+tags:
+  - how-to
+  - programming
+  - R
+  - web-scraping
+  - wikipedia
+  - data-mining
+  - statistics
+description: ''
+featured_image: ''
+
+---
+
+### Preface
+
+Imagine for a moment that you are interested in knowing the molecular function of some well-studied extracellular matrix proteins (don't leave yet). Some would suggest that we'd find out by simply opening a book. Others would argue that we should simply *open Rstudio*.
+
+But how will we put our knowledge to the test? The answer -- is with a quiz.
+
+### Objective
+
+Given a list of protein names, describe their molecular function using a data-mining approach. The collected data will be used in Part 2 when we construct a quiz.
+
+### Terminology
+
+| Term | Description |
+|:-------------|:------|
+| %>%  | Tidyverse pipe operator that "forwards" an object to an expression |
+| rvest | R package for easy web scraping |
+| scraping | Data extraction/mining from websites |
+| read_html | Given a url, reads html content |
+| xpath | Specifies specific parts of html |
+| html_nodes |	Extracts specific parts of html  |
+| grep | Pattern matching command |
+| gsub | Substitutes text matched by pattern |
+
+
+### Part 1 - Gathering data
+
+#### Scraping Wikipedia
+
+Our inital source of information will be *the* source of information, Wikipedia.
+
+https://en.wikipedia.org/wiki/Category:Extracellular_matrix_proteins
+
+<iframe width="700" height="500" scrolling="yes" frameborder="yes"  src="https://en.wikipedia.org/wiki/Category:Extracellular_matrix_proteins#mw-pages" > </iframe>
+
+We'll begin by extracting the above list of protein names, and assemble them (and their urls) into a dataframe.
+
+```{r, message = F}
+library(data.table) # For data transformation / reshaping
+library(tidyverse)  # For data transformation / reshaping
+library(rvest) 		# For web scraping
+library(purrr) 		# For map_df function
+library(knitr) 		# For table output
+
+wurl <- 'https://en.wikipedia.org/wiki/Category:Extracellular_matrix_proteins'
+
+# Using the above url, read html and select specific nodes*.
+wnodes <- wurl %>%
+	read_html %>%
+	html_nodes(xpath = '//*[@id="mw-pages"]/div/div/div')
+
+# Given a nodeset: select list <li> tags,
+# then select title (title) and url (href) attributes of <a> tags.
+get_wiki_list <- function(nodes) {
+	nodes %>%
+		html_nodes("ul > li") %>%
+		map_df(~{
+			tibble(
+				title = html_nodes(.x, 'a') %>% html_attr('title'),
+				link = html_nodes(.x, 'a') %>% html_attr('href')
+			)
+		}) -> wl
+	
+	return(wl)
+}
+
+# Iterate over nodes (html elements for each protein) and fetch their title and link
+wikitable <- sapply(wnodes, get_wiki_list, USE.NAMES = F, simplify = F) %>% bind_rows()
+
+# Display first 5 entries
+kable(head(wikitable, 5))
+
+```
+
+Neat. We have the protein names and their corresponding wiki urls.
+
+What's next?
+
+We will "visit" each wiki page and, if possible, fetch *another url* - one that leads to **UniProt**; a comprehensive protein knowledgebase.
+
+```{r, message = F}
+# Wikipedia base url
+wikiurl <- 'https://en.wikipedia.org'
+
+# For each protein in wikitable, scrape wiki article and fetch UniProt url
+get_uniprot_links <- function(wprot){
+	
+	# Get absolute url to article page
+	wlink <- paste0(wikiurl, wprot["link"])
+	
+	# Read article html
+	wtext <- read_html(wlink)
+	
+	# Find the article's "infobox"
+	infobox <- html_nodes(wtext, xpath='//table[contains(@class, "infobox")]//a')
+	
+	# If we can't find an infobox, just try to find uniprot.org url anywhere on page.
+	if(is_empty(infobox)){
+		up <- grep("uniprot.org", html_nodes(wtext, "a"), value = T)
+		if(length(up) == 0) {
+			return(NA)
+		} else {
+			up %>%
+				as_xml_document() %>%
+				html_attr('href')
+		}
+	} else {
+		# If we *do* find the infobox, find "UniProt" and get the url in the next cell (hence + 1)
+		infobox[ grep("UniProt", infobox) + 1 ] %>% html_attr('href')
+	}
+}
+
+# Iterate over dataframe, find UniProt urls
+wikitable$uniprot <- apply(wikitable, 1, get_uniprot_links)
+
+# Display first 5 entries
+kable(head(wikitable, 5))
+
+```
+
+In the event that we are unable to find their UniProt id, let's for now consider those proteins *not so well-studied* and exclude them.
+
+#### Scraping UniProt
+
+Our next target is the *Function* element on uniprot.org entry pages. An example:
+
+```{r, echo = F}
+knitr::include_graphics('/images/finc.png', error = FALSE)
+```
+<sub>Image source: https://www.uniprot.org/uniprot/P02751</sub>
+
+Similarly to before, we'll specify the xpath of the web-page to extract the content we are looking for.
+
+```{r, message = F}
+
+# Exclude linkless proteins
+wikitable <- wikitable[!is.na(wikitable$uniprot),]
+
+# Scrape UniProt, collect info: protein function and source organism
+get_protein_function <- function(wprot) {
+	# print(paste("Searching", wprot["title"]))
+	
+	# Follow UniProt url and read html
+	up <- read_html(wprot["uniprot"])
+	
+	# Find function and organism nodes
+	pfunction <- html_nodes(up, xpath = '//*[@id="function"]/div[1]') %>% html_text() %>% trimws()
+	organism <- html_nodes(up, xpath = '//*[@id="content-organism"]') %>% html_text()
+	
+	# If we don't find anything, set both to NA
+	if(length(pfunction) == 0) pfunction <- NA
+	if(length(organism) == 0) organism <- NA
+	
+	# Return as a list
+	return (list("pfunction" = pfunction,
+				 "organism" = organism))
+}
+
+# Temporary list to hold both function and organism
+pinfo <- apply(wikitable, 1, get_protein_function)
+
+# Convert lists to data frame columns
+wikitable$protein_function <- unlist(sapply(pinfo, FUN = function(x) x["pfunction"][[1]], USE.NAMES = F, simplify = F))
+wikitable$organism <- unlist(sapply(pinfo, FUN = function(x) x["organism"][[1]], USE.NAMES = F, simplify = F))
+
+# Clean up text (remove anything after occurrence of linebreak, specific words...).
+wikitable$protein_function <- gsub('[0-9] Publications|\\.By similarity|\\.S|\\.s|  .*', "", wikitable$protein_function)
+wikitable$protein_function <- gsub('(By similarity)|(PubMed:[0-9])|\r|\n|<.*.>|\\[.*.\\]|([0-9])', "", wikitable$protein_function)
+
+
+```
+
+Now let's take a look at what species we have harvested!
+
+```{r}
+kable(table(wikitable$organism), col.names = c("Organism", "Frequency"))
+
+```
+
+60 human proteins and one lone oyster.
+
+:I
+
+Sadly, we must exclude him.
+
+```{r}
+
+# Convert to data.table
+wikitable <- as.data.table(wikitable)
+
+# Keep only human proteins
+wikitable <- wikitable[organism == "Homo sapiens (Human)",]
+
+# Also, exclude rows where we could not find protein function
+wikitable <- wikitable[!is.na(protein_function),]
+
+# And remove entries that do not contain a relevant description
+wikitable <- wikitable[!startsWith(protein_function, "Complete GO annotation on QuickGO")]
+
+# Write table to file so that we can use it later
+fwrite(wikitable, "wikitable.tsv", quote = F, sep = '\t')
+
+# Show entries that have short descriptions
+kable(wikitable[nchar(protein_function) < 70, c("title", "protein_function")])
+
+```
+
+### Conclusion - Part 1
+
+So, what have we learned? We can programmatically collect data from a website by specifying a url and a html xpath. In this case, we investigated the molecular function of some proteins and compiled this information into a dataframe. While it may seem like a tedious approach for a simple task, much of the code we have written can be used in future projects where we need to collect and clean data.
+
+When we have meditated on today's efforts, and finished studying the function of proteins, it is time to test our knowledge.
+
+[Go to Part 2](/posts/2020-06-27-the-quiz-part-2.en.html)

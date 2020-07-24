@@ -1,0 +1,206 @@
+---
+title: How I made this blog
+author: Martin Rydén
+date: '2020-06-18'
+slug: how-i-made-this-blog
+categories: []
+tags:
+  - how-to
+---
+
+### Github
+
+- Create a new Github repository (or Github pages repo by naming it username.github.io)
+	- Check "Initialize this repository with a README"
+	- Add a license
+
+Clone your repo to your home dir:
+```{bash, eval = F, echo = T}
+cd
+git clone https://github.com/martinry/martinry.github.io.git
+cd martinry.github.io
+```
+
+### Install Hugo
+Mac:
+```{bash, eval = F, echo = T}
+brew install hugo
+```
+
+Linux:
+```{bash, eval = F, echo = T}
+sudo apt-get install hugo
+```
+
+### Create a new Hugo project 
+```{bash, eval = F, echo = T}
+# New project
+hugo new site ./ --force # --force to write to existing dir
+
+# Add a theme
+git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+echo 'theme = "ananke"' >> config.toml
+
+# Open config
+nano config.toml
+
+```
+Add some information to config.toml, here's how my file looks:
+
+```{bash, eval = F, echo = T}
+baseURL = "https://martinry.netlify.app/"
+languageCode = "en-us"
+title = "My PhD Portfolio"
+theme = "gohugo-theme-ananke"
+
+MetaDataFormat = "yaml"
+DefaultContentLanguage = "en"
+SectionPagesMenu = "main"
+Paginate = 5
+googleAnalytics = ""
+enableRobotsTXT = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[params]
+    description = "Just tryin' to make a change :/"
+    github  = "https://github.com/martinry"
+    linkedin = "https://www.linkedin.com/in/martin-ryd%C3%A9n-64039146/"
+    twitter = "https://twitter.com/martinryden89"
+    instagram = "https://www.instagram.com/maartinry/"
+    background_color_class = "bg-near-black"
+	recent_posts_number = 5
+```
+
+### Connect to Netlify
+```{bash, eval = F, echo = T}
+# Create and edit netlify.toml
+nano netlify.toml
+```
+Add the following content:
+
+```{bash, eval = F, echo = T}
+[build]
+ publish = "public"
+ command = "hugo --gc --minify"
+
+[context.production.environment]
+ HUGO_VERSION = "0.72.0"
+ HUGO_ENV = "production"
+ HUGO_ENABLEGITINFO = "true"
+
+[context.split1]
+ command = "hugo --gc --minify --enableGitInfo"
+
+[context.split1.environment]
+ HUGO_VERSION = "0.72.0"
+ HUGO_ENV = "production"
+
+[context.deploy-preview]
+ command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+
+[context.deploy-preview.environment]
+ HUGO_VERSION = "0.72.0"
+
+[context.branch-deploy]
+ command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy.environment]
+ HUGO_VERSION = "0.72.0"
+
+[context.next.environment]
+ HUGO_ENABLEGITINFO = "true"
+```
+
+- Go to https://www.netlify.com/
+- Sign up with Github
+- New site from Git
+- Select Github
+- Authorize, and select your repository
+- Set "Build command" to hugo --gc --minify
+- Set "Publish directory" to public
+- Click deploy site
+- Click Site settings, then Change site name, and pick one to your liking
+
+### Writing blog posts in Rmarkdown
+
+Why do we want to do this? Rmarkdown (.Rmd) uses markdown (.md) syntax but has the capability of executing R code through embedded code chunks. The R package [blogdown](https://bookdown.org/yihui/blogdown/) simplifies the task of creating, organizing and rendering Rmd's through an Rstudio addins and post templates.
+
+In Rstudio:
+```{Rscript, echo = T, eval = F}
+devtools::install_github('rstudio/blogdown')
+
+# alternatively
+install.packages('blogdown')
+
+setwd("~/martinry.github.io/")
+
+blogdown:::serve_site() # Build and render site locally
+blogdown:::new_post_addin() # Open form to create post
+
+```
+
+- In th form, fill in the necessary fields, change subdirectory to posts and the format to RMarkdown (.Rmd)
+- Change "draft" to false
+
+The result should look something like:
+
+```{Rscript, echo=T, eval=F}
+---
+title: Rmarkdown test
+author: Martin Rydén
+date: '2020-06-16'
+slug: rmarkdown-test
+categories: []
+tags:
+  - rmarkdown
+draft: false
+---
+	
+## Here is a title
+Here is some content
+```
+
+Go back to the terminal and type:
+```{bash, eval = F, echo = T}
+git add ./
+git commit -m "First post"
+git push
+```
+
+Within seconds, your site is deployed to 
+https://sitename.netlify.app
+
+
+### Syntax highlighting
+
+- Go to https://highlightjs.org/download/ and download the zip archive to `~/Downloads`
+
+```{bash, eval = F, echo =T}
+cd ~/Downloads/
+unzip -qq highlight.zip -d highlightjs/
+
+# Copy the highlight pack to the theme's static js dir
+cp highlight.pack.js ~/martinry.github.io/themes/gohugo-theme-ananke/static/dist/js/
+
+# Choose a style and copy the corresponding stylesheet to he theme's static css dir
+cd styles/
+cp solarized-dark.css ~/martinry.github.io/themes/gohugo-theme-ananke/static/dist/css/
+
+# Copy the theme's layouts/ dir to your blog's base path
+cd ~/martinry.github.io/
+cp -r themes/gohugo-theme-ananke/layouts/ ./layouts
+
+cd layouts/partials/
+
+# Add the following to the top of page-header.html (the file name may differ slightly between themes)
+<link rel="stylesheet" href="{{"dist/css/solarized-dark.css" | absURL}}" rel="stylesheet" id="theme-stylesheet"> 
+<script src="{{ "dist/js/highlight.pack.js" | absURL }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+```
+
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Martin Rydén&#39;s PhD Portfolio</title>
+    <link>/tags/r/</link>
+    <description>Recent content in R on Martin Rydén&#39;s PhD Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Quiz (Part 2)</title>
+      <link>/posts/the-quiz-part-2/</link>
+      <pubDate>Sat, 27 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/the-quiz-part-2/</guid>
+      <description>Now that we have gathered our knowledgebase, it is time to quiz ourselves on our knowledge.
+library(tidyverse) # For data transformation / reshaping library(data.table) # For data transformation / reshaping library(rvest) # For web scraping wikitable &amp;lt;- fread(&amp;quot;wikitable.tsv&amp;quot;) # Function to clean sentences by removing some non-alphanumeric characters and removing if it&amp;#39;s a &amp;quot;common&amp;quot; word clean &amp;lt;- function(dat){ dat %&amp;gt;% tolower() %&amp;gt;% strsplit(split = &amp;quot; &amp;quot;) %&amp;gt;% unlist() %&amp;gt;% gsub(&amp;quot;[[:punct:]]&amp;quot;, &amp;quot;&amp;quot;, .</description>
+    </item>
+    
+    <item>
+      <title>The Quiz (Part 1)</title>
+      <link>/posts/the-quiz-part-1/</link>
+      <pubDate>Fri, 26 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/the-quiz-part-1/</guid>
+      <description>Preface Imagine for a moment that you are interested in knowing the molecular function of some well-studied extracellular matrix proteins (don’t leave yet). Some would suggest that we’d find out by simply opening a book. Others would argue that we should simply open Rstudio.
+But how will we put our knowledge to the test? The answer – is with a quiz.
+ Objective Given a list of protein names, describe their molecular function using a data-mining approach.</description>
+    </item>
+    
+    <item>
+      <title>R programming tips</title>
+      <link>/posts/r-programming-tips/</link>
+      <pubDate>Wed, 24 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/r-programming-tips/</guid>
+      <description>1.0 Rstudio tips 1.1 Keyboard Shortcuts 1.2 Snippets 1.3 Cheatsheets  2.0 Code formatting 2.1 Comments  Reshaping data Long to Wide    1.0 Rstudio tips Rstudio is a powerful IDE. Study these not-so-obvious tips on how to realize its true potential.
+1.1 Keyboard Shortcuts Some information
+Ctrl + Shift + m gives
+%&amp;gt;%  1.2 Snippets Snippets are predefined blocks of code that are used to quickly insert a function.</description>
+    </item>
+    
+    <item>
+      <title>Ulam spiral in R</title>
+      <link>/posts/ulam-spiral-in-r/</link>
+      <pubDate>Thu, 18 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ulam-spiral-in-r/</guid>
+      <description>spiral &amp;lt;- function(N){ # Area size area &amp;lt;- matrix(1, N, N) # Find middle for x and y coordinates y &amp;lt;- ceiling(N/2) x &amp;lt;- ceiling(N/2) # Direction vector with starting iterations d &amp;lt;- c(1, # right 1, # down 2, # left 2) # up # Sequence of directional indices s &amp;lt;- rep(seq(1:4), N**2/4) i = 1 # iterator from 1:NN j = 0 # iterator to keep track of current direction b = F # Initialize break as false # Loop until N^2 is reached while(i &amp;lt;= N**2){ # Break if goofed if(is.</description>
+    </item>
+    
+  </channel>
+</rss>
